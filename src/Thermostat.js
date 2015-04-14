@@ -18,3 +18,12 @@ Thermostat.prototype.decreaseTemp = function() {
 
   this.temperature --;
 };
+
+Thermostat.prototype.powerSaveSwitch = function() {
+  if(this.powerSave === false) {
+    this.powerSave = true;
+  } else {
+  this.powerSave = false;
+}
+
+};

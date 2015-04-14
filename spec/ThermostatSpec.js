@@ -36,6 +36,7 @@ describe('Thermostat', function() {
         thermostat.increaseTemp();
       }).toThrow(new Error('Sorry, cannot go higher than 32'));
     });
+  });
 
   describe('has a power saving mode', function() {
 
@@ -43,13 +44,27 @@ describe('Thermostat', function() {
       expect(thermostat.powerSave).toEqual(true);
     });
 
-    it('that can be turned off', function() {
-      thermostat.powerSaveSwitch
+    it('that can be switched off', function() {
+      thermostat.powerSaveSwitch();
       expect(thermostat.powerSave).toEqual(false);
+    });
+
+    it('that can be switched on', function() {
+      thermostat.powerSaveSwitch();
+      thermostat.powerSaveSwitch();
+      expect(thermostat.powerSave).toEqual(true);
+    });
+
+    it('with a max temperature of 25', function() {
+      thermostat.powerSave = true;
+      thermostat.temperature = 25;
+      
+      expect(function() {
+        thermostat.increaseTemp();
+      }).toThrow(new Error('Power save on. Cannot go higher than 25'));
     });
 
   });
 
-  });
 
 });

@@ -14,6 +14,17 @@
 
   $('#reset').click(function(){
     thermostat.reset();
+    $('#temperature').css("color", "blue");
+    console.log($('#temperature').css("color"));
     $('#temperature').html(thermostat.temperature);
   });
+
+  $('#powersave').click(function(){ 
+    console.log('Hello')
+    thermostat.powerSaveSwitch();
+    console.log(thermostat.powerSave);
+    $('#temperature').html(thermostat.temperature);
+  });
+
+
 // });

@@ -30,6 +30,7 @@ describe('Thermostat', function() {
     });
 
     it('with a maximum value of 32', function() {
+      thermostat.powerSave = false;
       thermostat.temperature = 32;
 
       expect(function() {

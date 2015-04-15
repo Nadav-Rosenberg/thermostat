@@ -29,11 +29,15 @@ describe('Thermostat', function() {
 
   it('can go above 25 when powersave mode is turned off', function(){
     $('#powersave').click();
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < 6; i++) {
       $("input#up").click();
     }
     expect('#temperature').toContainText('26');
   });
 
+  it('displays degrres in green when temp is lower than 18', function() {
+    thermostat.temperature = 17;
+    expect($('#temperature').css("color")).toEqual('rgb(0, 255, 0)');
+  });
 
 });

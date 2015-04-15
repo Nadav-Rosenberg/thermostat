@@ -27,4 +27,13 @@ describe('Thermostat', function() {
     expect('#temperature').toContainText('20');
   });
 
+  it('can go above 25 when powersave mode is turned off', function(){
+    $('#powersave').click();
+    for (i = 0; i < 7; i++) {
+      $("input#up").click();
+    }
+    expect('#temperature').toContainText('26');
+  });
+
+
 });

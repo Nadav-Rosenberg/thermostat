@@ -3,6 +3,7 @@ describe('Thermostat', function() {
   beforeEach(function(){
     jasmine.getFixtures().fixturesPath = '.';
     loadFixtures('index.html');
+
   });
 
   it('displays default temperature', function(){
@@ -36,7 +37,6 @@ describe('Thermostat', function() {
   });
 
   it('displays degrres in green when temp is lower than 18', function() {
-      $('#powersave').click();
     for (i = 0; i < 6; i++) {
       $("input#down").click();
     }
@@ -48,5 +48,22 @@ describe('Thermostat', function() {
     $('#temperature').html(thermostat.temperature);
     expect($('#temperature').css("color")).toEqual('rgb(255, 255, 0)');
   });
+
+  it('dispplays degrees in red when the temp is over 25', function() {
+    $('#powersave').click();
+    for (i = 0; i < 6; i++) {
+      $("input#up").click();
+    }
+    $('#temperature').html(thermostat.temperature);
+    expect($('#temperature').css("color")).toEqual('rgb(255, 0, 0)');
+  });
+
+  it('it displays any new temperature on the page /temperature_change', function() {
+    $("input#up").click();
+    jasmine.getFixtures().fixturesPath = '.';
+    loadFixtures('/temperature_change');
+    expect($('#displayTemperature')).toContainText('21');
+  });
+
 
 });

@@ -4,6 +4,9 @@ var Thermostat = function() {
 };
 
 Thermostat.prototype.increaseTemp = function() {
+  if(this.powerSave === true && this.temperature === 25){
+    throw new Error('Power save on. Cannot go higher than 25')
+  }
   if(this.temperature === 32){
     throw new Error('Sorry, cannot go higher than 32');
   }
@@ -26,4 +29,8 @@ Thermostat.prototype.powerSaveSwitch = function() {
   this.powerSave = false;
 }
 
+};
+
+Thermostat.prototype.reset = function() {
+  this.temperature = 20;
 };

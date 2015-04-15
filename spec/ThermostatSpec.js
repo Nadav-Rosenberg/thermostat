@@ -66,5 +66,15 @@ describe('Thermostat', function() {
 
   });
 
+  describe('has a reset button', function() {
+    
+    it('that reset the thermostat to 20 degrees when pressed', function() {
+      thermostat.temperature = 25;
+      thermostat.reset();
+
+      expect(thermostat.temperature).toEqual(20);
+    });
+  });
+
 
 });

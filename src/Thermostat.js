@@ -12,6 +12,7 @@ Thermostat.prototype.increaseTemp = function() {
   }
 
   this.temperature ++;
+  console.log(this.temperature);
 };
 
 Thermostat.prototype.decreaseTemp = function() {

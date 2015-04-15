@@ -11,4 +11,9 @@
     thermostat.decreaseTemp();
     $('#temperature').html(thermostat.temperature);
   });
+
+  $('#reset').click(function(){
+    thermostat.reset();
+    $('#temperature').html(thermostat.temperature);
+  });
 // });

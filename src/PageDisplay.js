@@ -1,30 +1,43 @@
 // $(document).ready(function(){
+  
   var thermostat = new Thermostat();
+  
+  var color = function() {
+    if (thermostat.temperature > 17 && thermostat.temperature < 26 ) {
+      $('#temperature').css('color', 'rgb(255, 255, 0)'); 
+    } else if (thermostat.temperature > 25){
+      $('#temperature').css('color', 'rgb(255, 0, 0)');
+    } else {
+      $('#temperature').css('color', 'rgb(0, 255, 0)');
+    };
+  };
+
+  color();
+
   $('#temperature').html(thermostat.temperature);
 
   $('#up').click(function(){
     thermostat.increaseTemp();
+    color();
     $('#temperature').html(thermostat.temperature);
   });
 
   $('#down').click(function(){
     thermostat.decreaseTemp();
+    color();
     $('#temperature').html(thermostat.temperature);
   });
 
   $('#reset').click(function(){
     thermostat.reset();
-    $('#temperature').css("color", "blue");
-    console.log($('#temperature').css("color"));
+    color();
     $('#temperature').html(thermostat.temperature);
   });
 
   $('#powersave').click(function(){ 
-    console.log('Hello')
     thermostat.powerSaveSwitch();
-    console.log(thermostat.powerSave);
+    color();
     $('#temperature').html(thermostat.temperature);
   });
-
 
 // });

@@ -36,8 +36,17 @@ describe('Thermostat', function() {
   });
 
   it('displays degrres in green when temp is lower than 18', function() {
-    thermostat.temperature = 17;
+      $('#powersave').click();
+    for (i = 0; i < 6; i++) {
+      $("input#down").click();
+    }
+    $('#temperature').html(thermostat.temperature);
     expect($('#temperature').css("color")).toEqual('rgb(0, 255, 0)');
+  });
+
+  it('displays degrees in yellow when the temp is between 18 and 25', function(){
+    $('#temperature').html(thermostat.temperature);
+    expect($('#temperature').css("color")).toEqual('rgb(255, 255, 0)');
   });
 
 });

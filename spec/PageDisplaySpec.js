@@ -67,13 +67,6 @@ describe('Thermostat', function() {
     expect($('#temperature').css("color")).toEqual('rgb(255, 0, 0)');
   });
 
-  xit('displays any new temperature on the page /temperature_change', function() {
-    $("input#up").click();
-    jasmine.getFixtures().fixturesPath = '.';
-    loadFixtures('/temperature_change');
-    expect($('#displayTemperature')).toContainText('21');
-  });
-
   it('displays error message when try to increase temp over 25', function() {
     clickerLoop('up', 6);
     expect('#error').toContainText('Power save on. Cannot go higher than 25');
@@ -92,5 +85,13 @@ describe('Thermostat', function() {
     expect('#error').toContainText('Sorry, cannot go lower than 10');
   });
 
+  it('sends post request with the temperature to /temperature_change after any change', function() {
+    jasmine.Ajax.install();
+    spyOn(jQuery, "ajax");
+    $("input#up").click();
+    expect(jQuery.ajax).toHaveBeenCalled();
+    expect(jasmine.Ajax.requests.mostRecent).toEqual("temperature=21");
+    jasmine.Ajax.uninstall();
+  });
 
 });

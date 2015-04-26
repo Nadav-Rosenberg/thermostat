@@ -12,27 +12,35 @@
     };
   };
 
+  var executeWithErrorHandler = function(object, method) {
+    try {
+      method.apply(object);
+    }
+    catch(errorMessage) {
+        $('#error').html(errorMessage);
+        $('#error').fadeOut(1500, function() {
+          $('#error').text('');
+          $('#error').show();
+        });
+    }
+  };
+
   color();
 
   $('#temperature').html(thermostat.temperature);
 
   $('#up').click(function(){
-    try {
-        thermostat.increaseTemp();
-        color();
-        $('#temperature').html(thermostat.temperature);
-      }
-    catch(err){
-        $('#error').html(err);
-        $('#error').fadeOut(1500, function() {
-          $('#error').text('');
-          $('#error').show();
-        });
-      }
+    executeWithErrorHandler(thermostat, thermostat.increaseTemp);
+    color();
+    $('#temperature').html(thermostat.temperature);
+    $.post('/temperature_change', 
+      {
+          temperature: thermostat.temperature   
+      });
   });
 
   $('#down').click(function(){
-    thermostat.decreaseTemp();
+    executeWithErrorHandler(thermostat, thermostat.decreaseTemp); 
     color();
     $('#temperature').html(thermostat.temperature);
   });
